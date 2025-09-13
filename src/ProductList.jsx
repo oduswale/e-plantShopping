@@ -1,4 +1,3 @@
-// ProductList.jsx
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
@@ -6,7 +5,7 @@ import './ProductList.css';
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.items); // get cart items
+  const cart = useSelector((state) => state.cart.items);
 
   const plants = [
     { name: 'Aloe Vera', image: '/images/aloe-vera.jpg', description: 'Great for skin care.', cost: '$5.00' },
@@ -19,13 +18,16 @@ const ProductList = () => {
     dispatch(addItem(plant));
   };
 
-  // Check if a plant is already in cart
-  const isInCart = (plantName) => {
-    return cart.some((item) => item.name === plantName);
-  };
+  const isInCart = (plantName) => cart.some((item) => item.name === plantName);
+
+  // Calculate total items in cart
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="product-list">
+      {/* 🛒 Show total cart count */}
+      <h2 className="cart-count">🛒 Cart ({totalItems})</h2>
+
       {plants.map((plant) => (
         <div key={plant.name} className="product-card">
           <img src={plant.image} alt={plant.name} className="product-image" />
@@ -35,7 +37,7 @@ const ProductList = () => {
           <button
             className="add-to-cart"
             onClick={() => handleAddToCart(plant)}
-            disabled={isInCart(plant.name)} // disable if already in cart
+            disabled={isInCart(plant.name)}
           >
             {isInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
           </button>
