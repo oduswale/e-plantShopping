@@ -67,12 +67,12 @@ const ProductList = () => {
 
 export default ProductList;
 
-import { addItem } from "./CartSlice"; // ✅ Import reducer
+import { addItem } from "./CartSlice"; //  Import reducer
 
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false);
-  const [addedToCart, setAddedToCart] = useState({}); // ✅ Track added items
+  const [addedToCart, setAddedToCart] = useState({}); //  Track added items
   const dispatch = useDispatch();
 
   const plantsArray = [
@@ -96,7 +96,7 @@ function ProductList({ onHomeClick }) {
         // ...other plants (unchanged)
       ],
     },
-    // ✅ Other categories unchanged...
+    //  Other categories unchanged...
   ];
 
   // ==========================
