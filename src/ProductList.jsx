@@ -11,7 +11,62 @@ function ProductList({ onHomeClick }) {
 import React, { useState } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";// ProductList.jsx
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from './CartSlice';
+import './ProductList.css';
+
+const plants = [
+  {
+    name: 'Aloe Vera',
+    cost: 10,
+    description: 'A healing succulent.',
+    image: '/images/aloe-vera.jpg',
+  },
+  {
+    name: 'Snake Plant',
+    cost: 15,
+    description: 'Air-purifying and resilient.',
+    image: '/images/snake-plant.jpg',
+  },
+  {
+    name: 'Peace Lily',
+    cost: 20,
+    description: 'Beautiful flowering plant.',
+    image: '/images/peace-lily.jpg',
+  },
+];
+
+const ProductList = () => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (plant) => {
+    dispatch(addItem(plant));
+  };
+
+  return (
+    <div className="product-list">
+      {plants.map((plant) => (
+        <div key={plant.name} className="product-card">
+          <img src={plant.image} alt={plant.name} className="product-image" />
+          <h3>{plant.name}</h3>
+          <p>{plant.description}</p>
+          <p>${plant.cost}</p>
+          <button
+            className="add-to-cart-button"
+            onClick={() => handleAddToCart(plant)}
+          >
+            Add to Cart
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ProductList;
+
 import { addItem } from "./CartSlice"; // ✅ Import reducer
 
 function ProductList({ onHomeClick }) {
